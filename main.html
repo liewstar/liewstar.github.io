@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh" >
+<head>
+    <meta charset="UTF-8">
+    <title>我的请假单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="bootstrap.min.css" rel="stylesheet"/>
+    <link href="animate.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <link href="weui-basic.css" rel="stylesheet"/>
+    <link href="/wx/weixin/css/weui-ext-css/ext-article.css" rel="stylesheet"/>
+    <link href="weui-btn.css" rel="stylesheet"/>
+    <link href="weui-form.css" rel="stylesheet"/>
+    <link href="/wx/weixin/css/weui-css/weui-icon.css" rel="stylesheet"/>
+    <link href="/wx/weixin/css/weui-css/weui-form-adv.css" rel="stylesheet"/>
+    <link href="/wx/weixin/css/weui-css/weui-dialog.css" rel="stylesheet"/>
+    <link href="layui.css" rel="stylesheet"/>
+
+    <!--    加载层-->
+    <link rel="stylesheet" type="text/css" href="/wx/weixin/css/weui-css/weui-loading.css">
+    <link rel="stylesheet" type="text/css" href="/wx/weixin/css/weui-css/weui-tips.css">
+    <link rel="stylesheet" type="text/css" href="/wx/weixin/css/weui-css/weui-progress.css">
+    <script src="/wx/weixin/js/zepto.min.js"></script>
+    <script src="/wx/weixin/js/weui.min.js"></script>
+
+
+    <script src="/wx/weixin/js/weui.min.js"></script>
+    <script src="/wx/weixin/ajax/libs/layui/layui.js"></script>
+
+    <style>
+        .shenhe{
+            width: 85%;
+            height: 59px;
+            line-height: 59px;
+            border-radius: 5px;
+            background-color: rgba(125, 125, 125, 1);
+            border: 1px solid rgba(255, 255, 255, 0);
+            margin: 0 auto;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            color: white;
+        }
+        .layui-card-header{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="background:#F5F5F5;">
+<h4 style="padding: 10px;font-size: 20px;">我的请假单</h4>
+<div class="layui-card">
+    <div class="layui-card-header">请假内容</div>
+    <div class="layui-card-body">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label" style="font-weight: 1000;">姓名</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="name" readonly="readonly" value="廖鑫">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">请假类型</label></div>
+            <div class="weui-cell__bd">
+                
+                <input class="weui-input" readonly value="事假">
+                
+                
+                
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">开始时间</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly id="startDate" value="2023-11-23 08:30:00">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">结束时间</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly id="endDate" value="2023-11-23 12:00:00">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">请假天数</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly value="1">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">请假事由</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly id="reason" value="科目三考试">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">是否归寝</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly value="是">
+                
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label"  style="font-weight: 1000;">图片</label></div>
+            <div class="weui-cell__bd">
+                
+                <span>未上传图片</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">审批流程</div>
+    <div class="layui-card-body">
+        <div style="background: #15C38B" class="shenhe"><span>发起申请</span>
+            <span style="float: right;padding-right: 10px;" id="reviewDateTime">2023-11-22 21:25:31</span>
+        </div>
+        
+        <div class="shenhe" style="background: #15C38B"><span>辅导员审核通过</span></div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    <div id="loadingToast" style="opacity: 0; display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">提交中</p>
+        </div>
+    </div>
+    <div id="btn" style="text-align: center;padding-bottom:50px;margin-top: 0" class="weui-btn-area">
+        <a style="display: inline-block;background: #FD4F10;width: 100px;" class="weui-btn weui-btn_primary" href="javascript:" onclick="approve('oppose')">销假</a>
+        
+</div>
+<script>
+    var ctx = "\/wx\/weixin\/";
+    var prefix = ctx + "st";
+    var uri = prefix +  "/need/askleave/addPinLeave";
+    function approve(actionName) {
+        var $loadingToast = $('#loadingToast');
+        if ($loadingToast.css('display') != 'none') return;
+        $loadingToast.fadeIn(100);
+        $.ajax(
+            {
+                url:uri,
+                dataType:"json",
+                type: "post",
+                data: {'recordId':"96d6aa28-f8ee-4228-93ce-d4c149e9a82f",'submitXh':"2103011222",'submitName':"\u5ED6\u946B"},
+                success:function (result) {
+                    if(result.code == 0){
+                        $loadingToast.fadeOut(100);
+                        alert(result.msg);
+                        window.location.reload();
+                    }else {
+                        $loadingToast.fadeOut(100);
+                        alert(result.msg);
+                    }
+                }
+            }
+        );
+    }
+
+
+    // 获取保存的请假申请数据
+  var leaveRequest = localStorage.getItem("leaveRequest");
+
+// 检查是否有保存的数据
+if (leaveRequest) {
+  // 解析JSON字符串为对象
+  leaveRequest = JSON.parse(leaveRequest);
+
+  // 显示请假申请信息
+  document.getElementById("name").value = leaveRequest.name;
+  document.getElementById("reason").value = leaveRequest.reason;
+  document.getElementById("startDate").value = leaveRequest.startDate;
+  document.getElementById("endDate").value = leaveRequest.endDate;
+  document.getElementById("reviewDateTime").textContent = leaveRequest.reviewDateTime;
+}
+</script>
+</body>
+</html>
